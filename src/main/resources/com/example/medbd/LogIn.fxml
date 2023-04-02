@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.medbd.controllers.LogInController">
+    <children>
+        <Button fx:id="LogInButton" layoutX="109.0" layoutY="318.0" mnemonicParsing="false" prefHeight="38.0"
+                prefWidth="77.0" text="Войти"/>
+        <TextField fx:id="LoginField" layoutX="73.0" layoutY="123.0" promptText="Логин"/>
+        <TextField fx:id="PasswField" layoutX="73.0" layoutY="187.0" promptText="Пароль"/>
+    </children>
+</AnchorPane>
