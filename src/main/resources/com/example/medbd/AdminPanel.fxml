@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="465.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.AdmController">
+   <children>
+      <TabPane layoutX="10.0" layoutY="14.0" prefHeight="431.0" prefWidth="694.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="DoctorTab" text="Doctor">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="694.0">
+                     <children>
+                        <TableView layoutX="21.0" layoutY="14.0" prefHeight="310.0" prefWidth="658.0">
+                          <columns>
+                            <TableColumn fx:id="idDoct" maxWidth="107.99997138977051" prefWidth="60.79998970031738" text="Id" />
+                            <TableColumn fx:id="FamDoct" prefWidth="121.5999984741211" text="Fam" />
+                              <TableColumn fx:id="ImDoct" prefWidth="100.0" text="Imya" />
+                              <TableColumn fx:id="otchDoct" prefWidth="125.5999755859375" text="otch" />
+                              <TableColumn fx:id="spesDoct" prefWidth="160.00003051757812" text="spec" />
+                              <TableColumn fx:id="roomDoct" prefWidth="94.4000244140625" text="room" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="AddBut" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#addDoc" text="Add" />
+                        <Button fx:id="DelBut" layoutX="90.0" layoutY="328.0" mnemonicParsing="false" onAction="#DelDoc" text="Del" />
+                        <Button fx:id="UpdBut" layoutX="166.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" text="Upd" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

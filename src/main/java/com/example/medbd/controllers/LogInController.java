@@ -2,10 +2,17 @@ package com.example.medbd.controllers;
 
 
 import com.example.medbd.BdConnection.BdTools;
+import com.example.medbd.bdApplic;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,15 +33,12 @@ public class LogInController {
     @FXML
     public void initialize() {
         LogInButton.setOnAction(event -> {
-            String login = LoginField.getText();
-            String pasword = PasswField.getText();
-            if (checkUser(login, pasword))
-                System.out.print("Pobeda");
+           checkUser(LoginField.getText(),PasswField.getText());
         });
 
     }
 
-    private boolean checkUser(String login, String password) {
+    private void checkUser(String login, String password) {
         try {
             connection = BdTools.getConnection();
             // создаем запрос к базе данных
@@ -45,12 +49,34 @@ public class LogInController {
             ResultSet rs = select.executeQuery();
             // если результат запроса не пустой, то возвращаем true
             if (rs.next()) {
-                return true;
+                String title = rs.getString("title");
+                System.out.println(title);
+                if (title.equals("0")) {
+                    openAdminWindow();
+                } else {
+                    //запуск для регистратора
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText(null);
+                alert.setContentText("Неверно введены данные!");
+                alert.showAndWait();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
         }
-        // если пользователь не найден, то возвращаем false
-        return false;
+    }
+
+    public void openAdminWindow() throws  IOException {
+        // Создание нового окна
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("AdminPanel.fxml"));
+        Parent root = loader.load();
+        Stage newStage = new Stage();
+        newStage.setTitle("AdminPanel");
+        newStage.setScene(new Scene(root));
+        newStage.show();
+
     }
 }

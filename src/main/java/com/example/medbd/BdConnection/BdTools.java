@@ -6,6 +6,12 @@ public class BdTools {
     private static Connection connection;
 
     public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         if (connection == null) {
             String url = "jdbc:postgresql://localhost:5432/regbd";
             String user = "postgres";
