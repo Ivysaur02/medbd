@@ -3,13 +3,12 @@ package com.example.medbd.controllers;
 
 import com.example.medbd.BdConnection.BdTools;
 import com.example.medbd.bdApplic;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LogInController {
+    @FXML
+    private Button CancelButton;
 
     @FXML
     private Button LogInButton;
@@ -27,18 +28,29 @@ public class LogInController {
     private TextField LoginField;
 
     @FXML
-    private TextField PasswField;
+    private Label MessageLabel;
+
+    @FXML
+    private PasswordField PaswField;
+
+    @FXML
+    void closeStage(ActionEvent event) {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+
     Connection connection = null;
+
 
     @FXML
     public void initialize() {
-        LogInButton.setOnAction(event -> {
-           checkUser(LoginField.getText(),PasswField.getText());
-        });
+        LogInButton.setOnAction(event ->
+                checkUser(LoginField.getText(), PaswField.getText(), (Stage) LogInButton.getScene().getWindow()));
 
     }
 
-    private void checkUser(String login, String password) {
+    private void checkUser(String login, String password, Stage stage) {
         try {
             connection = BdTools.getConnection();
             // создаем запрос к базе данных
@@ -52,16 +64,13 @@ public class LogInController {
                 String title = rs.getString("title");
                 System.out.println(title);
                 if (title.equals("0")) {
-                    openAdminWindow();
+                    loadUserWindow("AdminPanel.fxml", "AdminPanel");
                 } else {
-                    //запуск для регистратора
+                    loadUserWindow("RegistrPanel.fxml", "RegistrPanel");
                 }
+                stage.close();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ошибка");
-                alert.setHeaderText(null);
-                alert.setContentText("Неверно введены данные!");
-                alert.showAndWait();
+                MessageLabel.setText("Неправильный логин или пароль");
             }
 
         } catch (SQLException | IOException e) {
@@ -69,12 +78,12 @@ public class LogInController {
         }
     }
 
-    public void openAdminWindow() throws  IOException {
+    public void loadUserWindow(String fail, String title) throws IOException {
         // Создание нового окна
-        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("AdminPanel.fxml"));
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource(fail));
         Parent root = loader.load();
         Stage newStage = new Stage();
-        newStage.setTitle("AdminPanel");
+        newStage.setTitle(title);
         newStage.setScene(new Scene(root));
         newStage.show();
 

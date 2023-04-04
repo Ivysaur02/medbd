@@ -1,19 +1,19 @@
 package com.example.medbd.models;
 
-public class Person {
-    int id;
+public abstract class Person {
+    String id;
     String Fam;
     String Imya;
     String Otch;
 
-    public Person(int id, String fam, String imya, String otch) {
+    public Person(String id, String fam, String imya, String otch) {
         this.id = id;
         Fam = fam;
         Imya = imya;
         Otch = otch;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -29,7 +29,7 @@ public class Person {
         return Otch;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

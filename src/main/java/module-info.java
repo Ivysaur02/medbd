@@ -9,4 +9,7 @@ module com.example.medbd {
     exports com.example.medbd;
     exports com.example.medbd.controllers;
     opens com.example.medbd.controllers to javafx.fxml;
+    opens com.example.medbd.models to javafx.base;
+
+
 }
