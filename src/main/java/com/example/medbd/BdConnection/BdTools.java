@@ -1,5 +1,7 @@
 package com.example.medbd.BdConnection;
 
+import com.example.medbd.models.Person;
+
 import java.sql.*;
 
 public class BdTools {
@@ -19,6 +21,16 @@ public class BdTools {
             connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
+    }
+
+    public static void deleteUser(Person user, String table) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        conn = getConnection();
+        String query = "DELETE FROM " + table + " WHERE id=?";
+        stmt = conn.prepareStatement(query);
+        stmt.setInt(1, Integer.parseInt(user.getId()));
+        stmt.executeUpdate();
     }
 
 }

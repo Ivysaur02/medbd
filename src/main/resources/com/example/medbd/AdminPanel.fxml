@@ -11,30 +11,44 @@
    <children>
       <TabPane layoutX="10.0" layoutY="14.0" prefHeight="431.0" prefWidth="694.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="DoctorTab" text="Doctor">
+          <Tab fx:id="DoctorTab" text="Врачи">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="694.0">
                      <children>
                         <TableView fx:id="DoctTable" layoutX="21.0" layoutY="14.0" prefHeight="310.0" prefWidth="658.0">
                           <columns>
                             <TableColumn fx:id="idDoct" maxWidth="107.99997138977051" prefWidth="60.79998970031738" text="Id" />
-                            <TableColumn fx:id="FamDoct" prefWidth="121.5999984741211" text="Fam" />
-                              <TableColumn fx:id="ImDoct" prefWidth="100.0" text="Imya" />
-                              <TableColumn fx:id="otchDoct" prefWidth="125.5999755859375" text="otch" />
-                              <TableColumn fx:id="spesDoct" prefWidth="160.00003051757812" text="spec" />
-                              <TableColumn fx:id="roomDoct" prefWidth="94.4000244140625" text="room" />
+                            <TableColumn fx:id="FamDoct" prefWidth="121.5999984741211" text="Фамилия" />
+                              <TableColumn fx:id="ImDoct" prefWidth="100.0" text="Имя" />
+                              <TableColumn fx:id="otchDoct" prefWidth="125.5999755859375" text="Отчество" />
+                              <TableColumn fx:id="spesDoct" prefWidth="160.00003051757812" text="Специальность" />
+                              <TableColumn fx:id="roomDoct" prefWidth="94.4000244140625" text="Кабинет" />
                           </columns>
                         </TableView>
                         <Button fx:id="AddBut" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#addDoc" text="Add" />
                         <Button fx:id="DelBut" layoutX="90.0" layoutY="328.0" mnemonicParsing="false" onAction="#DelDoc" text="Del" />
-                        <Button fx:id="UpdBut" layoutX="166.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" text="Upd" />
+                        <Button fx:id="UpdBut" layoutX="161.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" text="Upd" />
+                        <Button fx:id="Refresh" layoutX="230.0" layoutY="328.0" mnemonicParsing="false" onAction="#RefreshData" text="Refresh" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Untitled Tab 2">
+          <Tab fx:id="UserTab" text="Пользователи">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="UserTable" layoutX="4.0" layoutY="6.0" prefHeight="328.0" prefWidth="686.0">
+                          <columns>
+                            <TableColumn fx:id="idUser" prefWidth="50.400023460388184" text="id" />
+                            <TableColumn fx:id="FamUser" prefWidth="114.39996719360352" text="Фамилия" />
+                              <TableColumn fx:id="ImyaUser" minWidth="6.4000244140625" prefWidth="106.40000915527344" text="Игорь" />
+                              <TableColumn fx:id="OtchUser" prefWidth="102.4000244140625" text="Отчество" />
+                              <TableColumn fx:id="TitleUser" prefWidth="100.00006103515625" text="Должность" />
+                              <TableColumn fx:id="LoginUser" prefWidth="118.4000244140625" text="login" />
+                              <TableColumn fx:id="PasswordUser" prefWidth="119.199951171875" text="password" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
