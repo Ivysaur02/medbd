@@ -28,11 +28,22 @@ import java.sql.Statement;
 
 public class AdmController {
 
+
     @FXML
     private Button AddBut;
 
     @FXML
+    private Button AddUserButton;
+
+    @FXML
     private Button DelBut;
+
+    @FXML
+    private Button DelUserButton;
+
+
+    @FXML
+    private Button RefrehUserButton;
 
     @FXML
     private TableView<Doctor> DoctTable;
@@ -95,10 +106,19 @@ public class AdmController {
     @FXML
     void DelDoc(ActionEvent event) throws SQLException {
         Doctor selectedDoctor = DoctTable.getSelectionModel().getSelectedItem();
-        if (selectedDoctor != null){
+        if (selectedDoctor != null) {
             BdTools.deleteUser(selectedDoctor, "doctor");
         }
         showDoctors();
+    }
+
+    @FXML
+    void DelUser(ActionEvent event) throws SQLException {
+        User selectedDoctor = UserTable.getSelectionModel().getSelectedItem();
+        if (selectedDoctor != null) {
+            BdTools.deleteUser(selectedDoctor, "receptionist");
+        }
+        showUser();
     }
 
     @FXML
@@ -133,10 +153,27 @@ public class AdmController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+
+    @FXML
+    void addUser(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("addUserPanel.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     @FXML
     void RefreshData(ActionEvent event) {
         showDoctors();
     }
+
+    @FXML
+    void RefreshUser(ActionEvent event) {
+        showUser();
+    }
+
     ObservableList<Doctor> DoctorList = FXCollections.observableArrayList();
     ObservableList<User> UserList = FXCollections.observableArrayList();
 
@@ -197,7 +234,7 @@ public class AdmController {
                 " INNER JOIN title_job ON r.title = title_job.id_title ";
         Statement st = connection.createStatement();
         ResultSet resultSet = st.executeQuery(sel);
-        while (resultSet.next()){
+        while (resultSet.next()) {
             String id = resultSet.getString(1);
             String surname = resultSet.getString(2);
             String name = resultSet.getString(3);
@@ -205,14 +242,14 @@ public class AdmController {
             String title = resultSet.getString(5);
             String login = resultSet.getString(6);
             String password = resultSet.getString(7);
-            User user = new User(id,surname,name,otch,title,login,password);
+            User user = new User(id, surname, name, otch, login, password, title);
             UserList.add(user);
         }
         resultSet.close();
         st.close();
     }
 
-    private  void showUser(){
+    private void showUser() {
 
         try {
             getUserFromBD();
