@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.medbd.RegistPanel"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="546.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.RegController">
+   <children>
+      <BorderPane prefHeight="546.0" prefWidth="770.0">
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab fx:id="DoctorTab" text="Врачи">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="DoctorTableView" layoutY="51.0" prefHeight="346.0" prefWidth="770.0">
+                                <columns>
+                                  <TableColumn fx:id="idDoctor" prefWidth="121.59997403621674" text="id" />
+                                  <TableColumn fx:id="famDoctor" prefWidth="140.00000762939453" text="Фамилия" />
+                                    <TableColumn fx:id="imDoctor" prefWidth="130.4000244140625" text="Имя" />
+                                    <TableColumn fx:id="otcDoctor" prefWidth="138.39999389648438" text="Отчество" />
+                                    <TableColumn fx:id="DegreeDoctor" prefWidth="161.59991455078125" text="Специальность" />
+                                    <TableColumn fx:id="RoomDoctor" prefWidth="75.99997558593748" text="Кабинет" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="openDoctor" layoutX="34.0" layoutY="418.0" mnemonicParsing="false" onAction="#openDoctor" text="Выбрать" />
+                              <TextField fx:id="SearchDoctorField" layoutX="123.0" layoutY="14.0" prefHeight="26.0" prefWidth="232.0" />
+                              <Label layoutX="28.0" layoutY="18.0" prefHeight="18.0" prefWidth="76.0" text="Поиск врача" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="PatientTab" text="Пациенты">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="PatientTableView" layoutY="133.0" prefHeight="273.0" prefWidth="770.0">
+                                <columns>
+                                  <TableColumn fx:id="idPatient" prefWidth="63.999998569488525" text="id" />
+                                  <TableColumn fx:id="famPatient" prefWidth="139.99994659423828" text="Фамилия" />
+                                    <TableColumn fx:id="imPatient" prefWidth="110.4000244140625" text="Имя" />
+                                    <TableColumn fx:id="otcPatient" prefWidth="127.199951171875" text="Отчество" />
+                                    <TableColumn fx:id="sexPatient" prefWidth="35.20001220703125" text="Пол" />
+                                    <TableColumn fx:id="datePatient" prefWidth="124.00003051757812" text="Дата рождения" />
+                                    <TableColumn fx:id="SNILS" prefWidth="161.5999755859375" text="СНИЛС" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="OpenPatientButton" layoutX="31.0" layoutY="424.0" mnemonicParsing="false" onAction="#openPatient" text="Выбрать" />
+                              <TextField fx:id="FamTextField" layoutX="31.0" layoutY="14.0" promptText="Фамилия" />
+                              <TextField fx:id="OtchTextField" layoutX="31.0" layoutY="91.0" promptText="Отчество" />
+                              <TextField fx:id="ImTextField" layoutX="31.0" layoutY="52.0" promptText="Имя" />
+                              <TextField fx:id="DateTextField" layoutX="220.0" layoutY="14.0" promptText="Дата рождения" />
+                              <TextField fx:id="SNILSTextField" layoutX="220.0" layoutY="52.0" promptText="СНИЛС" />
+                              <Button fx:id="SearchPatientButton" layoutX="419.0" layoutY="13.0" mnemonicParsing="false" onAction="#SearchPatient" prefHeight="26.0" prefWidth="60.0" text="Найти" />
+                              <Button fx:id="AddPatientButton" layoutX="609.0" layoutY="18.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="42.0" prefWidth="126.0" text="Новый пациент" />
+                              <Button fx:id="showPatientButton" layoutX="423.0" layoutY="52.0" mnemonicParsing="false" onAction="#clearSearch" text="Сбросить" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <top>
+            <AnchorPane prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="214.0" text="Панель Регистратора" />
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
 </AnchorPane>

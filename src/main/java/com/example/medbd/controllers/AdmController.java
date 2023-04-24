@@ -105,6 +105,7 @@ public class AdmController {
 
     @FXML
     void DelDoc(ActionEvent event) throws SQLException {
+        //todo написать алерт на врача
         Doctor selectedDoctor = DoctTable.getSelectionModel().getSelectedItem();
         if (selectedDoctor != null) {
             BdTools.deleteUser(selectedDoctor, "doctor");
@@ -114,6 +115,7 @@ public class AdmController {
 
     @FXML
     void DelUser(ActionEvent event) throws SQLException {
+        //todo написать аллерт
         User selectedDoctor = UserTable.getSelectionModel().getSelectedItem();
         if (selectedDoctor != null) {
             BdTools.deleteUser(selectedDoctor, "receptionist");

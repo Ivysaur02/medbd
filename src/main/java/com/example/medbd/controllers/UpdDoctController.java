@@ -32,6 +32,7 @@ public class UpdDoctController {
 
     @FXML
     void UpdDoctor(ActionEvent event) throws SQLException {
+        //todo написать ошибки
         String query = "UPDATE doctor SET imya=?, fam=?, otch=?, room=? WHERE id=?";
         connection = BdTools.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);

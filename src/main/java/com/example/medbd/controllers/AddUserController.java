@@ -39,13 +39,14 @@ public class AddUserController {
 
     @FXML
     void addUser(ActionEvent event) throws SQLException {
+        //todo написать аллерты
         String im = ImyaField.getText();
         String fam = FamField.getText();
         String otc = OtchField.getText();
         String login = LoginField.getText();
         String pas = PasswordField.getText();
-        int title= 0;
-        switch (TitleComboBox.getSelectionModel().getSelectedItem()){
+        int title = 0;
+        switch (TitleComboBox.getSelectionModel().getSelectedItem()) {
             case "Администратор" -> title = 0;
             case "Регистратор" -> title = 1;
         }
@@ -60,12 +61,12 @@ public class AddUserController {
         String query = "INSERT INTO receptionist VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, Integer.parseInt(ind));
-        preparedStatement.setString(2,fam);
-        preparedStatement.setString(3,im);
-        preparedStatement.setString(4,otc);
-        preparedStatement.setInt(5,title);
-        preparedStatement.setString(6,login);
-        preparedStatement.setString(7,pas);
+        preparedStatement.setString(2, fam);
+        preparedStatement.setString(3, im);
+        preparedStatement.setString(4, otc);
+        preparedStatement.setInt(5, title);
+        preparedStatement.setString(6, login);
+        preparedStatement.setString(7, pas);
 
         preparedStatement.executeUpdate();
 
@@ -87,10 +88,10 @@ public class AddUserController {
 
     @FXML
     public void initialize() {
-        TitleComboBox.getItems().addAll("Администратор","Регистратор");
+        TitleComboBox.getItems().addAll("Администратор", "Регистратор");
     }
 
-    private void clean(){
+    private void clean() {
         FamField.setText("");
         ImyaField.setText("");
         LoginField.setText("");

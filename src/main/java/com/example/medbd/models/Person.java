@@ -10,7 +10,7 @@ public abstract class Person {
         this.id = id;
         Fam = fam;
         Imya = imya;
-        Otch = otch;
+        Otch = otch != null ? otch : "";;
     }
 
     public String getId() {
