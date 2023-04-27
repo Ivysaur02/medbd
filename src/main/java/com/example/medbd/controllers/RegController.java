@@ -1,6 +1,7 @@
 package com.example.medbd.controllers;
 
 import com.example.medbd.BdConnection.BdTools;
+import com.example.medbd.bdApplic;
 import com.example.medbd.models.Doctor;
 import com.example.medbd.models.Patient;
 import javafx.beans.value.ObservableValue;
@@ -9,13 +10,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,11 +106,28 @@ public class RegController {
     private Button openDoctor;
 
     @FXML
+    private Label RegistratorLabel;
+
+    @FXML
     private TableColumn<Doctor, String> otcDoctor;
 
     @FXML
     private Button showPatientButton;
 
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    void onLogPanel(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("Login.fxml"));
+        Stage closestage = (Stage) exitButton.getScene().getWindow();
+        Parent root = loader.load();
+        Stage newStage = new Stage();
+        newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.setScene(new Scene(root));
+        newStage.show();
+        closestage.close();
+    }
 
     @FXML
     void clearSearch(ActionEvent event) {
@@ -135,16 +155,39 @@ public class RegController {
     }
 
     @FXML
-    void openPatient(ActionEvent event) {
+    void openPatient(ActionEvent event) throws IOException {
+        Patient patient = PatientTableView.getSelectionModel().getSelectedItem();
+        if (patient == null) {
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("PatientPanel.fxml"));
+        Parent root = loader.load();
+        PatientPanelController patientPanelController = loader.getController();
 
+        // Вызываем метод initData() на контроллере нового окна и передаем в него выбранного пользователя
+        patientPanelController.getPatientInfo(patient);
+
+        // Отображаем новое окно
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
-    
+
+
+    @FXML
+    void refreshPatient(ActionEvent event) {
+        showPatient();
+    }
+
     @FXML
     public void initialize() {
         showDoctors();
         showPatient();
         SearchDoctorField.textProperty().addListener(this::onSearchFieldChanged);
     }
+
+    String id_reg = null;
 
     ObservableList<Doctor> DoctorList = FXCollections.observableArrayList();
     ObservableList<Patient> PatientList = FXCollections.observableArrayList();
@@ -172,7 +215,7 @@ public class RegController {
         stmt.close();
     }
 
-    private void getPatientFromBD() throws SQLException{
+    private void getPatientFromBD() throws SQLException {
         PatientList.clear();
         Connection connection = BdTools.getConnection();
         String sel = "SELECT * FROM medcard";
@@ -190,7 +233,7 @@ public class RegController {
             String apart = resultSet.getString(9);
             String phone = resultSet.getString(10);
             String snils = resultSet.getString(11);
-            Patient pat = new Patient(id,fam,im,otc,sex,date,street,home,apart,snils,phone);
+            Patient pat = new Patient(id, fam, im, otc, sex, date, street, home, apart, snils, phone);
             PatientList.add(pat);
         }
         resultSet.close();
@@ -215,7 +258,7 @@ public class RegController {
         DoctorTableView.setItems(doctorObservableList);
     }
 
-    private void showPatient(){
+    private void showPatient() {
         try {
             getPatientFromBD();
         } catch (SQLException e) {
@@ -282,5 +325,9 @@ public class RegController {
         PatientTableView.setItems(filteredList);
     }
 
+    public void initData(String title, String id) {
+        RegistratorLabel.setText(title);
+        id_reg = id;
+    }
 }
 

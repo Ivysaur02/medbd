@@ -60,7 +60,8 @@
                               <TextField fx:id="SNILSTextField" layoutX="220.0" layoutY="52.0" promptText="СНИЛС" />
                               <Button fx:id="SearchPatientButton" layoutX="419.0" layoutY="13.0" mnemonicParsing="false" onAction="#SearchPatient" prefHeight="26.0" prefWidth="60.0" text="Найти" />
                               <Button fx:id="AddPatientButton" layoutX="609.0" layoutY="18.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="42.0" prefWidth="126.0" text="Новый пациент" />
-                              <Button fx:id="showPatientButton" layoutX="423.0" layoutY="52.0" mnemonicParsing="false" onAction="#clearSearch" text="Сбросить" />
+                              <Button fx:id="showPatientButton" layoutX="419.0" layoutY="52.0" mnemonicParsing="false" onAction="#clearSearch" text="Сбросить" />
+                              <Button fx:id="RefreshButton" layoutX="117.0" layoutY="424.0" mnemonicParsing="false" onAction="#refreshPatient" text="Обновить" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -70,7 +71,8 @@
          <top>
             <AnchorPane prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="30.0" prefWidth="214.0" text="Панель Регистратора" />
+                  <Label fx:id="RegistratorLabel" layoutY="6.0" prefHeight="30.0" prefWidth="214.0" />
+                  <Button fx:id="exitButton" layoutX="656.0" layoutY="8.0" mnemonicParsing="false" onAction="#onLogPanel" prefHeight="26.0" prefWidth="65.0" text="Выход" />
                </children>
             </AnchorPane>
          </top>

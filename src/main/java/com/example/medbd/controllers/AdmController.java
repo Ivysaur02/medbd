@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -104,6 +101,27 @@ public class AdmController {
     private Button Refresh;
 
     @FXML
+    private Label adminLabel;
+
+
+    @FXML
+    private Button exitButton;
+
+
+    @FXML
+    void onLogInPanel(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("Login.fxml"));
+        Stage closestage = (Stage) exitButton.getScene().getWindow();
+        Parent root = loader.load();
+        Stage newStage = new Stage();
+        newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.setScene(new Scene(root));
+        newStage.show();
+        closestage.close();
+
+    }
+
+    @FXML
     void DelDoc(ActionEvent event) throws SQLException {
         //todo написать алерт на врача
         Doctor selectedDoctor = DoctTable.getSelectionModel().getSelectedItem();
@@ -178,6 +196,8 @@ public class AdmController {
 
     ObservableList<Doctor> DoctorList = FXCollections.observableArrayList();
     ObservableList<User> UserList = FXCollections.observableArrayList();
+
+    String id_adm = null;
 
     @FXML
     public void initialize() {
@@ -271,5 +291,9 @@ public class AdmController {
         UserTable.setItems(userObservableList);
     }
 
+    public void initData(String title, String id) {
+        adminLabel.setText(title);
+        id_adm = id;
+    }
 
 }

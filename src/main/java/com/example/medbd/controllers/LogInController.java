@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -62,11 +63,14 @@ public class LogInController {
             // если результат запроса не пустой, то возвращаем true
             if (rs.next()) {
                 String title = rs.getString("title");
-                System.out.println(title);
+                String fam = rs.getString("fam");
+                String im = rs.getString("imya");
+                String otch = rs.getString("otch");
+                String id = rs.getString("id");
                 if (title.equals("0")) {
-                    loadUserWindow("AdminPanel.fxml", "AdminPanel");
+                    loadUserWindow("AdminPanel.fxml", "Admin " + fam + " " + im + " " + otch, true, id);
                 } else {
-                    loadUserWindow("RegistrPanel.fxml", "RegistrPanel");
+                    loadUserWindow("RegistrPanel.fxml", "Registrator " + fam + " " + im + " " + otch, false, id);
                 }
                 stage.close();
             } else {
@@ -78,14 +82,26 @@ public class LogInController {
         }
     }
 
-    public void loadUserWindow(String fail, String title) throws IOException {
+    public void loadUserWindow(String fail, String title, boolean check, String id) throws IOException {
         // Создание нового окна
         FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource(fail));
         Parent root = loader.load();
         Stage newStage = new Stage();
-        newStage.setTitle(title);
-        newStage.setScene(new Scene(root));
-        newStage.show();
+        newStage.initStyle(StageStyle.UNDECORATED);
+        if (check) {
+            AdmController controller = loader.getController();
+            controller.initData(title, id);
+            newStage.setTitle(title);
+            newStage.setScene(new Scene(root));
+            newStage.show();
+        } else {
+            RegController controller = loader.getController();
+            controller.initData(title, id);
+            newStage.setTitle(title);
+            newStage.setScene(new Scene(root));
+            newStage.show();
+        }
 
     }
+
 }
