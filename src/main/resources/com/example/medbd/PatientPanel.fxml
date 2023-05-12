@@ -28,7 +28,7 @@
                                     <TextField fx:id="PatientName" layoutX="202.0" layoutY="41.0" />
                                     <TextField fx:id="PatientStreet" layoutX="129.0" layoutY="201.0" />
                                     <TextField fx:id="PhonePatient" layoutX="204.0" layoutY="107.0" />
-                                    <TextField fx:id="PatientDate" layoutX="614.0" layoutY="39.0" />
+                                    <TextField fx:id="PatientDate" layoutX="614.0" layoutY="39.0" promptText="YYYY-MM-DD" />
                                     <TextField fx:id="PatientSnils" layoutX="37.0" layoutY="107.0" />
                                     <TextField fx:id="PatientSex" layoutX="551.0" layoutY="39.0" prefHeight="26.0" prefWidth="34.0" />
                                     <TextField fx:id="PatientOtch" layoutX="368.0" layoutY="40.0" />
@@ -69,14 +69,14 @@
                                     <ComboBox fx:id="SearchComboBox" layoutX="317.0" layoutY="51.0" prefWidth="150.0" />
                                     <Label layoutX="274.0" layoutY="55.0" text="Тип" />
                                     <Label layoutX="32.0" layoutY="14.0" text="Поиск" />
-                                    <Label layoutX="628.0" layoutY="23.0" text="Создание нового листа" />
-                                    <TextField layoutX="628.0" layoutY="64.0" />
-                                    <ComboBox fx:id="AddNewComboBox" layoutX="628.0" layoutY="110.0" prefWidth="150.0" />
-                                    <TextArea layoutX="628.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" />
-                                    <Label layoutX="563.0" layoutY="68.0" text="Дата" />
-                                    <Label layoutX="566.0" layoutY="114.0" text="Тип" />
-                                    <Label layoutX="477.0" layoutY="154.0" prefHeight="30.0" prefWidth="140.0" text="Основная информация" />
-                                    <Button fx:id="AddHistoryButton" layoutX="628.0" layoutY="388.0" mnemonicParsing="false" onAction="#addhistory" text="Добавить" />
+                                    <Label layoutX="630.0" layoutY="23.0" text="Создание нового листа" />
+                                    <TextField fx:id="AddDataField" layoutX="627.0" layoutY="57.0" promptText="YYYY-MM-DD" />
+                                    <ComboBox fx:id="AddNewComboBox" layoutX="627.0" layoutY="103.0" prefWidth="150.0" />
+                                    <TextArea fx:id="InfoTextArea" layoutX="627.0" layoutY="147.0" prefHeight="200.0" prefWidth="200.0" />
+                                    <Label layoutX="562.0" layoutY="61.0" text="Дата" />
+                                    <Label layoutX="565.0" layoutY="107.0" text="Тип" />
+                                    <Label layoutX="476.0" layoutY="147.0" prefHeight="30.0" prefWidth="140.0" text="Основная информация" />
+                                    <Button fx:id="AddHistoryButton" layoutX="627.0" layoutY="381.0" mnemonicParsing="false" onAction="#addhistory" text="Добавить" />
                                     <Button fx:id="CleareButton" layoutX="98.0" layoutY="388.0" mnemonicParsing="false" onAction="#clearSearch" text="Очистить и обновить" />
                                  </children>
                               </AnchorPane>

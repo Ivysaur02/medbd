@@ -17,6 +17,9 @@ import java.sql.*;
 public class PatientPanelController {
 
     @FXML
+    private TextField AddDataField;
+
+    @FXML
     private Button AddHistoryButton;
 
     @FXML
@@ -75,6 +78,10 @@ public class PatientPanelController {
 
 
     @FXML
+    private TextArea InfoTextArea;
+
+
+    @FXML
     private TableColumn<MedHistory, String> idHistory;
 
 
@@ -95,7 +102,6 @@ public class PatientPanelController {
     private Button CleareButton;
 
     Patient patient;
-    private Connection connection;
 
 
     @FXML
@@ -131,7 +137,7 @@ public class PatientPanelController {
         );
 
         statement.setInt(1, Integer.parseInt(PatientSnils.getText()));
-        statement.setDate(2, java.sql.Date.valueOf(PatientDate.getText()));
+        statement.setDate(2, Date.valueOf(PatientDate.getText()));
         //TODO проверять ебучую дату
         statement.setInt(3, Integer.parseInt(PatientRoom.getText()));
         statement.setString(4, PatientSex.getText());
@@ -149,7 +155,38 @@ public class PatientPanelController {
     }
 
     @FXML
-    void addhistory(ActionEvent event) {
+    void addhistory(ActionEvent event) throws SQLException {
+        int type;
+        String info = InfoTextArea.getText();
+        Date date;
+        if (AddNewComboBox.getSelectionModel().getSelectedItem() != null){
+            type = AddNewComboBox.getSelectionModel().getSelectedItem().getId();
+        }
+        else {return;}
+        if (!AddDataField.getText().isEmpty()){
+            date = Date.valueOf(AddDataField.getText());
+        }
+        else {return;}
+        Connection conn = BdTools.getConnection();
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT MAX(id_hiscard) + 1 FROM history_medcard");
+        resultSet.next(); // Необходимо выполнить перед чтением данных из ResultSet
+        int ind = resultSet.getInt(1);
+
+        PreparedStatement prSt = conn.prepareStatement("INSERT INTO history_medcard" +
+                " (id_hiscard, type, gen_inf, date) VALUES (?, ?, ?, ?) ");
+        prSt.setInt(1, ind);
+        prSt.setInt(2,type);
+        prSt.setString(3,info);
+        prSt.setDate(4,date);
+        prSt.executeUpdate();
+
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO medmap VALUES(?,?)");
+        preparedStatement.setInt(1, Integer.parseInt(patient.getId()));
+        preparedStatement.setInt(2, ind);
+        preparedStatement.executeUpdate();
+
 
     }
 
@@ -212,11 +249,12 @@ public class PatientPanelController {
         Connection conn = BdTools.getConnection();
         Statement stmt = conn.createStatement();
 
-        String query = "SELECT hm.id_hiscard, thc.name_type, hm.gen_inf, hm.date " +
-                "FROM history_medcard hm " +
-                "INNER JOIN type_of_card thc ON thc.id_type=hm.type " +
-                "INNER JOIN medmap md ON hm.id_hiscard = md.id_medcard " +
-                "WHERE md.id_medcard = " + patient.getId();
+        String query = "SELECT hm.id_hiscard, thc.name_type, hm.gen_inf, hm.date "
+                + "FROM history_medcard hm "
+                + "JOIN type_of_card thc ON thc.id_type=hm.type "
+                + "JOIN medmap ON hm.id_hiscard = medmap.id_histcard "
+                + "JOIN medcard ON medmap.id_medcard = medcard.id_medcard "
+                + "WHERE medcard.id_medcard = " + patient.getId();
 
         String date = SeartTextField.getText();
 
