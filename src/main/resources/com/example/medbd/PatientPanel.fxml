@@ -59,24 +59,25 @@
                                     <TableView fx:id="HistoryTableView" layoutX="25.0" layoutY="91.0" prefHeight="265.0" prefWidth="371.0">
                                       <columns>
                                         <TableColumn fx:id="idHistory" prefWidth="75.0" text="id" />
-                                        <TableColumn fx:id="DateHistory" prefWidth="183.99998474121094" text="Тип" />
-                                          <TableColumn fx:id="TypeHistory" prefWidth="112.0" text="Дата" />
+                                        <TableColumn fx:id="TypeHistory" prefWidth="183.99998474121094" text="Тип" />
+                                          <TableColumn fx:id="DateHistory" prefWidth="112.0" text="Дата" />
                                       </columns>
                                     </TableView>
                                     <Button fx:id="SearchHistoryButton" layoutX="33.0" layoutY="388.0" mnemonicParsing="false" onAction="#searchhistory" text="Найти" />
                                     <Label layoutX="32.0" layoutY="55.0" text="Дата" />
-                                    <TextField layoutX="98.0" layoutY="51.0" />
-                                    <ComboBox layoutX="317.0" layoutY="51.0" prefWidth="150.0" />
+                                    <TextField fx:id="SeartTextField" layoutX="98.0" layoutY="51.0" />
+                                    <ComboBox fx:id="SearchComboBox" layoutX="317.0" layoutY="51.0" prefWidth="150.0" />
                                     <Label layoutX="274.0" layoutY="55.0" text="Тип" />
                                     <Label layoutX="32.0" layoutY="14.0" text="Поиск" />
                                     <Label layoutX="628.0" layoutY="23.0" text="Создание нового листа" />
                                     <TextField layoutX="628.0" layoutY="64.0" />
-                                    <ComboBox layoutX="628.0" layoutY="110.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="AddNewComboBox" layoutX="628.0" layoutY="110.0" prefWidth="150.0" />
                                     <TextArea layoutX="628.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" />
                                     <Label layoutX="563.0" layoutY="68.0" text="Дата" />
                                     <Label layoutX="566.0" layoutY="114.0" text="Тип" />
                                     <Label layoutX="477.0" layoutY="154.0" prefHeight="30.0" prefWidth="140.0" text="Основная информация" />
                                     <Button fx:id="AddHistoryButton" layoutX="628.0" layoutY="388.0" mnemonicParsing="false" onAction="#addhistory" text="Добавить" />
+                                    <Button fx:id="CleareButton" layoutX="98.0" layoutY="388.0" mnemonicParsing="false" onAction="#clearSearch" text="Очистить и обновить" />
                                  </children>
                               </AnchorPane>
                         </content>

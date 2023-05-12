@@ -3,15 +3,16 @@ package com.example.medbd.controllers;
 import com.example.medbd.BdConnection.BdTools;
 import com.example.medbd.models.MedHistory;
 import com.example.medbd.models.Patient;
+import com.example.medbd.models.TypeHistoryCard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PatientPanelController {
 
@@ -80,6 +81,19 @@ public class PatientPanelController {
     @FXML
     private TextField PhonePatient;
 
+    @FXML
+    private ComboBox<TypeHistoryCard> AddNewComboBox;
+
+    @FXML
+    private ComboBox<TypeHistoryCard> SearchComboBox;
+
+    @FXML
+    private TextField SeartTextField;
+
+
+    @FXML
+    private Button CleareButton;
+
     Patient patient;
     private Connection connection;
 
@@ -147,15 +161,28 @@ public class PatientPanelController {
 
     @FXML
     void searchhistory(ActionEvent event) {
-
+        showMedHistory();
     }
+
+
+
+    @FXML
+    void clearSearch(ActionEvent event) {
+        SearchComboBox.getSelectionModel().clearSelection();
+        SeartTextField.setText("");
+        showMedHistory();
+    }
+
+    ObservableList<MedHistory> MedHistList = FXCollections.observableArrayList();
+    ObservableList<TypeHistoryCard> TypeHistList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-
+        showTypeHistory();
     }
 
-    public void getPatientInfo(Patient pat){
+
+    public void getPatientInfo(Patient pat) {
         this.patient = pat;
         PatientFam.setText(patient.getFam());
         PatientDate.setText(patient.getDate());
@@ -178,6 +205,78 @@ public class PatientPanelController {
         PatientHome.setEditable(false);
         PatientRoom.setEditable(false);
     }
+
+
+    private void getMedHistoryFromBD() throws SQLException {
+        MedHistList.clear();
+        Connection conn = BdTools.getConnection();
+        Statement stmt = conn.createStatement();
+
+        String query = "SELECT hm.id_hiscard, thc.name_type, hm.gen_inf, hm.date " +
+                "FROM history_medcard hm " +
+                "INNER JOIN type_of_card thc ON thc.id_type=hm.type " +
+                "INNER JOIN medmap md ON hm.id_hiscard = md.id_medcard " +
+                "WHERE md.id_medcard = " + patient.getId();
+
+        String date = SeartTextField.getText();
+
+        if (SearchComboBox.getSelectionModel().getSelectedItem() != null){
+            String type = SearchComboBox.getSelectionModel().getSelectedItem().getName();
+            query += " AND thc.name_type = '" + type + "'";
+        }
+        if (!date.isEmpty()) {
+            query += " AND hm.date = '" + date + "'";
+        }
+
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            String id = rs.getString(1);
+            String name = rs.getString(2);
+            String inf = rs.getString(3);
+            String date_hist = rs.getString(4);
+            MedHistList.add(new MedHistory(id, name, date_hist, inf));
+        }
+    }
+
+    private void showMedHistory(){
+         try {
+            getMedHistoryFromBD();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ObservableList<MedHistory> medHistoryObservableList = FXCollections.observableArrayList(MedHistList);
+        idHistory.setCellValueFactory(new PropertyValueFactory<>("id_hist"));
+        TypeHistory.setCellValueFactory(new PropertyValueFactory<>("type"));
+        DateHistory.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        HistoryTableView.setItems(medHistoryObservableList);
+    }
+
+
+    private void getTypeHistoryCard() {
+        TypeHistList.clear();
+        try {
+            Connection conn = BdTools.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM type_of_card");
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                TypeHistoryCard typeOfCard = new TypeHistoryCard(id, name);
+                TypeHistList.add(typeOfCard);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showTypeHistory() {
+        getTypeHistoryCard();
+        AddNewComboBox.setItems(TypeHistList);
+        SearchComboBox.setItems(TypeHistList);
+    }
+
+
 
 }
 
