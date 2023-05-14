@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -107,6 +108,11 @@ public class AdmController {
     @FXML
     private Button exitButton;
 
+    double yOffset;
+    double xOffset;
+    @FXML
+    private Node AdmPanel;
+
 
     @FXML
     void onLogInPanel(ActionEvent event) throws IOException {
@@ -180,6 +186,7 @@ public class AdmController {
         FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("addUserPanel.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -203,6 +210,15 @@ public class AdmController {
     public void initialize() {
         showDoctors();
         showUser();
+        AdmPanel.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        AdmPanel.setOnMouseDragged(event -> {
+            Stage stage = (Stage) AdmPanel.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
 
     }
 

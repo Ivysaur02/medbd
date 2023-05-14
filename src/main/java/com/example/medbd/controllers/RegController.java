@@ -9,12 +9,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -144,8 +147,21 @@ public class RegController {
         searchPatient();
     }
 
+    double yOffset;
+    double xOffset;
     @FXML
-    void addPatient(ActionEvent event) {
+    private Node RegPanel;
+
+    @FXML
+    void addPatient(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("addPatientPanel.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
+        stage.show();
 
     }
 
@@ -185,6 +201,15 @@ public class RegController {
         showDoctors();
         showPatient();
         SearchDoctorField.textProperty().addListener(this::onSearchFieldChanged);
+        RegPanel.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        RegPanel.setOnMouseDragged(event -> {
+            Stage stage = (Stage) RegPanel.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
     String id_reg = null;

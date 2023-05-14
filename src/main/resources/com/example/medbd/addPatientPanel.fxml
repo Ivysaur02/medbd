@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="addPatientPan" prefHeight="540.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.AddPatientController">
+   <children>
+      <BorderPane layoutX="4.0" prefHeight="550.0" prefWidth="566.0">
+         <center>
+            <AnchorPane prefHeight="501.0" prefWidth="566.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="15.0" layoutY="42.0" prefHeight="414.0" prefWidth="250.0">
+                     <children>
+                        <Label text="Фамилия*" />
+                        <TextField fx:id="FamTextField" />
+                        <Label text="Имя*" />
+                        <TextField fx:id="ImyaTextField" />
+                        <Label text="Отчество" />
+                        <TextField fx:id="OtchTextField" />
+                        <Label text="Пол*" />
+                        <ComboBox fx:id="SexCombBox" prefHeight="26.0" prefWidth="58.0" />
+                        <Label prefHeight="18.0" prefWidth="153.0" text="Дата рождения*" />
+                        <TextField fx:id="DateField" promptText="YYYY-MM-DD" />
+                        <Label prefHeight="18.0" prefWidth="138.0" text="СНИЛС*" />
+                        <TextField fx:id="SNILSField" />
+                        <Label prefHeight="18.0" prefWidth="78.0" text="Телефон" />
+                        <TextField fx:id="PhoneField" />
+                        <Label prefHeight="18.0" prefWidth="47.0" text="Улица" />
+                        <TextField fx:id="StreetField" />
+                        <Label prefHeight="20.0" prefWidth="46.0" text="Дом" />
+                        <TextField fx:id="ApartField" prefHeight="11.0" prefWidth="254.0" />
+                        <Label prefHeight="18.0" prefWidth="78.0" text="Квартира" />
+                        <TextField fx:id="RoomField" />
+                     </children>
+                  </VBox>
+                  <Label layoutX="15.0" layoutY="14.0" prefHeight="18.0" prefWidth="289.0" text="Поля помеченные * обязательны для заполнения" />
+                  <Button fx:id="AddPatientButton" layoutX="474.0" layoutY="405.0" mnemonicParsing="false" onAction="#addPAtient" text="Добавить" />
+                  <Button fx:id="ClearButton" layoutX="475.0" layoutY="449.0" mnemonicParsing="false" onAction="#clearField" text="Очистить" />
+               </children>
+            </AnchorPane>
+         </center>
+         <top>
+            <AnchorPane prefHeight="44.0" prefWidth="566.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="174.0" text="Добавление нового пациента" />
+                  <Button fx:id="ExitButton" layoutX="467.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="68.0" text="Выход" />
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

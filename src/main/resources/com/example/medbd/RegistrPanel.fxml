@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="546.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.RegController">
    <children>
-      <BorderPane prefHeight="546.0" prefWidth="770.0">
+      <BorderPane fx:id="RegPanel" prefHeight="546.0" prefWidth="770.0">
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
@@ -56,8 +56,8 @@
                               <TextField fx:id="FamTextField" layoutX="31.0" layoutY="14.0" promptText="Фамилия" />
                               <TextField fx:id="OtchTextField" layoutX="31.0" layoutY="91.0" promptText="Отчество" />
                               <TextField fx:id="ImTextField" layoutX="31.0" layoutY="52.0" promptText="Имя" />
-                              <TextField fx:id="DateTextField" layoutX="220.0" layoutY="14.0" promptText="Дата рождения" />
-                              <TextField fx:id="SNILSTextField" layoutX="220.0" layoutY="52.0" promptText="СНИЛС" />
+                              <TextField fx:id="DateTextField" layoutX="220.0" layoutY="14.0" prefHeight="26.0" prefWidth="182.0" promptText="Дата рождения(YYYY-MM-DD)" />
+                              <TextField fx:id="SNILSTextField" layoutX="220.0" layoutY="52.0" prefHeight="26.0" prefWidth="184.0" promptText="СНИЛС" />
                               <Button fx:id="SearchPatientButton" layoutX="419.0" layoutY="13.0" mnemonicParsing="false" onAction="#SearchPatient" prefHeight="26.0" prefWidth="60.0" text="Найти" />
                               <Button fx:id="AddPatientButton" layoutX="609.0" layoutY="18.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="42.0" prefWidth="126.0" text="Новый пациент" />
                               <Button fx:id="showPatientButton" layoutX="419.0" layoutY="52.0" mnemonicParsing="false" onAction="#clearSearch" text="Сбросить" />

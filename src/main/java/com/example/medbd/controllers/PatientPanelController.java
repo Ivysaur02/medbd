@@ -3,17 +3,22 @@ package com.example.medbd.controllers;
 import com.example.medbd.BdConnection.BdTools;
 import com.example.medbd.models.MedHistory;
 import com.example.medbd.models.Patient;
+import com.example.medbd.models.TypeHistoryCard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PatientPanelController {
+
+    @FXML
+    private TextField AddDataField;
 
     @FXML
     private Button AddHistoryButton;
@@ -74,14 +79,30 @@ public class PatientPanelController {
 
 
     @FXML
+    private TextArea InfoTextArea;
+
+
+    @FXML
     private TableColumn<MedHistory, String> idHistory;
 
 
     @FXML
     private TextField PhonePatient;
 
+    @FXML
+    private ComboBox<TypeHistoryCard> AddNewComboBox;
+
+    @FXML
+    private ComboBox<TypeHistoryCard> SearchComboBox;
+
+    @FXML
+    private TextField SeartTextField;
+
+
+    @FXML
+    private Button CleareButton;
+
     Patient patient;
-    private Connection connection;
 
 
     @FXML
@@ -117,7 +138,7 @@ public class PatientPanelController {
         );
 
         statement.setInt(1, Integer.parseInt(PatientSnils.getText()));
-        statement.setDate(2, java.sql.Date.valueOf(PatientDate.getText()));
+        statement.setDate(2, Date.valueOf(PatientDate.getText()));
         //TODO проверять ебучую дату
         statement.setInt(3, Integer.parseInt(PatientRoom.getText()));
         statement.setString(4, PatientSex.getText());
@@ -135,7 +156,38 @@ public class PatientPanelController {
     }
 
     @FXML
-    void addhistory(ActionEvent event) {
+    void addhistory(ActionEvent event) throws SQLException {
+        int type;
+        String info = InfoTextArea.getText();
+        Date date;
+        if (AddNewComboBox.getSelectionModel().getSelectedItem() != null){
+            type = AddNewComboBox.getSelectionModel().getSelectedItem().getId();
+        }
+        else {return;}
+        if (!AddDataField.getText().isEmpty()){
+            date = Date.valueOf(AddDataField.getText());
+        }
+        else {return;}
+        Connection conn = BdTools.getConnection();
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT MAX(id_hiscard) + 1 FROM history_medcard");
+        resultSet.next(); // Необходимо выполнить перед чтением данных из ResultSet
+        int ind = resultSet.getInt(1);
+
+        PreparedStatement prSt = conn.prepareStatement("INSERT INTO history_medcard" +
+                " (id_hiscard, type, gen_inf, date) VALUES (?, ?, ?, ?) ");
+        prSt.setInt(1, ind);
+        prSt.setInt(2,type);
+        prSt.setString(3,info);
+        prSt.setDate(4,date);
+        prSt.executeUpdate();
+
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO medmap VALUES(?,?)");
+        preparedStatement.setInt(1, Integer.parseInt(patient.getId()));
+        preparedStatement.setInt(2, ind);
+        preparedStatement.executeUpdate();
+
 
     }
 
@@ -147,15 +199,44 @@ public class PatientPanelController {
 
     @FXML
     void searchhistory(ActionEvent event) {
-
+        showMedHistory();
     }
+
+
+
+    @FXML
+    void clearSearch(ActionEvent event) {
+        SearchComboBox.getSelectionModel().clearSelection();
+        SeartTextField.setText("");
+        showMedHistory();
+    }
+
+    ObservableList<MedHistory> MedHistList = FXCollections.observableArrayList();
+    ObservableList<TypeHistoryCard> TypeHistList = FXCollections.observableArrayList();
+
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    private Node PatientPanel;
 
     @FXML
     public void initialize() {
-
+        showTypeHistory();
+        PatientPanel.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        PatientPanel.setOnMouseDragged(event -> {
+            Stage stage = (Stage) PatientPanel.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
-    public void getPatientInfo(Patient pat){
+
+    public void getPatientInfo(Patient pat) {
         this.patient = pat;
         PatientFam.setText(patient.getFam());
         PatientDate.setText(patient.getDate());
@@ -178,6 +259,79 @@ public class PatientPanelController {
         PatientHome.setEditable(false);
         PatientRoom.setEditable(false);
     }
+
+
+    private void getMedHistoryFromBD() throws SQLException {
+        MedHistList.clear();
+        Connection conn = BdTools.getConnection();
+        Statement stmt = conn.createStatement();
+
+        String query = "SELECT hm.id_hiscard, thc.name_type, hm.gen_inf, hm.date "
+                + "FROM history_medcard hm "
+                + "JOIN type_of_card thc ON thc.id_type=hm.type "
+                + "JOIN medmap ON hm.id_hiscard = medmap.id_histcard "
+                + "JOIN medcard ON medmap.id_medcard = medcard.id_medcard "
+                + "WHERE medcard.id_medcard = " + patient.getId();
+
+        String date = SeartTextField.getText();
+
+        if (SearchComboBox.getSelectionModel().getSelectedItem() != null){
+            String type = SearchComboBox.getSelectionModel().getSelectedItem().getName();
+            query += " AND thc.name_type = '" + type + "'";
+        }
+        if (!date.isEmpty()) {
+            query += " AND hm.date = '" + date + "'";
+        }
+
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            String id = rs.getString(1);
+            String name = rs.getString(2);
+            String inf = rs.getString(3);
+            String date_hist = rs.getString(4);
+            MedHistList.add(new MedHistory(id, name, date_hist, inf));
+        }
+    }
+
+    private void showMedHistory(){
+         try {
+            getMedHistoryFromBD();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ObservableList<MedHistory> medHistoryObservableList = FXCollections.observableArrayList(MedHistList);
+        idHistory.setCellValueFactory(new PropertyValueFactory<>("id_hist"));
+        TypeHistory.setCellValueFactory(new PropertyValueFactory<>("type"));
+        DateHistory.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        HistoryTableView.setItems(medHistoryObservableList);
+    }
+
+
+    private void getTypeHistoryCard() {
+        TypeHistList.clear();
+        try {
+            Connection conn = BdTools.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM type_of_card");
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                TypeHistoryCard typeOfCard = new TypeHistoryCard(id, name);
+                TypeHistList.add(typeOfCard);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showTypeHistory() {
+        getTypeHistoryCard();
+        AddNewComboBox.setItems(TypeHistList);
+        SearchComboBox.setItems(TypeHistList);
+    }
+
+
 
 }
 
