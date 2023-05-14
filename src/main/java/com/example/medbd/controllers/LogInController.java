@@ -6,6 +6,7 @@ import com.example.medbd.bdApplic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -43,12 +44,26 @@ public class LogInController {
 
     Connection connection = null;
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    private Node LogInPan;
+
 
     @FXML
     public void initialize() {
         LogInButton.setOnAction(event ->
                 checkUser(LoginField.getText(), PaswField.getText(), (Stage) LogInButton.getScene().getWindow()));
-
+        LogInPan.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        LogInPan.setOnMouseDragged(event -> {
+            Stage stage = (Stage) LogInPan.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
     private void checkUser(String login, String password, Stage stage) {

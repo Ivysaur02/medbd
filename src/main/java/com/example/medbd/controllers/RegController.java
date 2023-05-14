@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -148,32 +149,15 @@ public class RegController {
 
     double yOffset;
     double xOffset;
+    @FXML
+    private Node RegPanel;
 
     @FXML
     void addPatient(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("addPatientPanel.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        /*stage.initStyle(StageStyle.UNDECORATED);
-        stage.setResizable(true);
-        stage.setScene(new Scene(root));
-        stage.show();*/
         Scene scene = new Scene(root);
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = stage.getX() - event.getScreenX();
-                yOffset = stage.getY() - event.getScreenY();
-            }
-        });
-        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() + xOffset);
-                stage.setY(event.getScreenY() + yOffset);
-            }
-        });
-
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
@@ -217,6 +201,15 @@ public class RegController {
         showDoctors();
         showPatient();
         SearchDoctorField.textProperty().addListener(this::onSearchFieldChanged);
+        RegPanel.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        RegPanel.setOnMouseDragged(event -> {
+            Stage stage = (Stage) RegPanel.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
     String id_reg = null;

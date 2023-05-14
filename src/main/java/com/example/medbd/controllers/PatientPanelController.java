@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -213,9 +214,25 @@ public class PatientPanelController {
     ObservableList<MedHistory> MedHistList = FXCollections.observableArrayList();
     ObservableList<TypeHistoryCard> TypeHistList = FXCollections.observableArrayList();
 
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    private Node PatientPanel;
+
     @FXML
     public void initialize() {
         showTypeHistory();
+        PatientPanel.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        PatientPanel.setOnMouseDragged(event -> {
+            Stage stage = (Stage) PatientPanel.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
 

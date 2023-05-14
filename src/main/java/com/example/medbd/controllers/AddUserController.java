@@ -3,10 +3,12 @@ package com.example.medbd.controllers;
 import com.example.medbd.BdConnection.BdTools;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.*;
 
@@ -29,6 +31,9 @@ public class AddUserController {
 
     @FXML
     private TextField OtchField;
+
+    @FXML
+    private Button ExitButton;
 
     @FXML
     private TextField PasswordField;
@@ -86,9 +91,24 @@ public class AddUserController {
         clean();
     }
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    private Node AddUser;
+
     @FXML
     public void initialize() {
         TitleComboBox.getItems().addAll("Администратор", "Регистратор");
+        AddUser.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        AddUser.setOnMouseDragged(event -> {
+            Stage stage = (Stage) AddUser.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
     }
 
     private void clean() {
@@ -99,4 +119,11 @@ public class AddUserController {
         TitleComboBox.setValue("");
         OtchField.setText("");
     }
+
+    @FXML
+    void exit(ActionEvent event) {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
+    }
+
 }

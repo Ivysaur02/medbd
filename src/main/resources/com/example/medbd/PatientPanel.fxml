@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="492.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.PatientPanelController">
    <children>
-      <BorderPane prefHeight="492.0" prefWidth="857.0">
+      <BorderPane fx:id="PatientPanel" prefHeight="492.0" prefWidth="857.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>

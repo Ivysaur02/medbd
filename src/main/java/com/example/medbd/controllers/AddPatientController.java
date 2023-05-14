@@ -1,10 +1,15 @@
 package com.example.medbd.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class AddPatientController {
 
@@ -62,10 +67,29 @@ public class AddPatientController {
 
     }
 
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    private Node addPatientPan;
+
     @FXML
     public void initialize(){
         SexCombBox.getItems().addAll("М", "Ж");
+        addPatientPan.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        addPatientPan.setOnMouseDragged(event -> {
+            Stage stage = (Stage) addPatientPan.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+
     }
+
+
 
 }
 
