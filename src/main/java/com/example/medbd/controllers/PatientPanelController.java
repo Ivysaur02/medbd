@@ -140,7 +140,10 @@ public class PatientPanelController {
         statement.setInt(1, Integer.parseInt(PatientSnils.getText()));
         statement.setDate(2, Date.valueOf(PatientDate.getText()));
         //TODO проверять ебучую дату
-        statement.setInt(3, Integer.parseInt(PatientRoom.getText()));
+        if (!PatientRoom.getText().isEmpty())
+            statement.setInt(3, Integer.parseInt(PatientRoom.getText()));
+        else
+            statement.setNull(3, Types.INTEGER);
         statement.setString(4, PatientSex.getText());
         statement.setString(5, PhonePatient.getText());
         statement.setString(6, PatientStreet.getText());
