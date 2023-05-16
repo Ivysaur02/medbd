@@ -30,9 +30,10 @@
                                     <TableColumn fx:id="RoomDoctor" prefWidth="75.99997558593748" text="Кабинет" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="openDoctor" layoutX="34.0" layoutY="418.0" mnemonicParsing="false" onAction="#openDoctor" text="Выбрать" />
+                              <Button fx:id="openDoctor" layoutX="34.0" layoutY="418.0" mnemonicParsing="false" onAction="#openDoctor" text="Рассписание" />
                               <TextField fx:id="SearchDoctorField" layoutX="123.0" layoutY="14.0" prefHeight="26.0" prefWidth="232.0" />
                               <Label layoutX="28.0" layoutY="18.0" prefHeight="18.0" prefWidth="76.0" text="Поиск врача" />
+                              <Button fx:id="CreateTicketButton" layoutX="135.0" layoutY="418.0" mnemonicParsing="false" onAction="#createTicket" text="Записать на приём" />
                            </children>
                         </AnchorPane>
                   </content>

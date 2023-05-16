@@ -67,6 +67,9 @@ public class RegController {
     private TableColumn<Doctor, String> RoomDoctor;
 
     @FXML
+    private Button CreateTicketButton;
+
+    @FXML
     private TableColumn<Patient, String> datePatient;
 
     @FXML
@@ -166,9 +169,33 @@ public class RegController {
     }
 
     @FXML
-    void openDoctor(ActionEvent event) {
+    void openDoctor(ActionEvent event) throws IOException {
+        Doctor doc = DoctorTableView.getSelectionModel().getSelectedItem();
+        if(doc == null)
+            return;
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("DoctorInfoPanel.fxml"));
+        Parent root = loader.load();
+        DoctInfController doctInfController = loader.getController();
+
+        // Вызываем метод initData() на контроллере нового окна и передаем в него выбранного пользователя
+        doctInfController.setInfo(doc);
+        // Отображаем новое окно
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
+
+    @FXML
+    void createTicket(ActionEvent event) {
+        Doctor doc = DoctorTableView.getSelectionModel().getSelectedItem();
+        Patient pat = PatientTableView.getSelectionModel().getSelectedItem();
+        if(doc == null || pat ==null )
+            return;
+
+    }
+
 
     @FXML
     void openPatient(ActionEvent event) throws IOException {
@@ -213,6 +240,8 @@ public class RegController {
     }
 
     String id_reg = null;
+    String name_reg;
+
 
     ObservableList<Doctor> DoctorList = FXCollections.observableArrayList();
     ObservableList<Patient> PatientList = FXCollections.observableArrayList();
@@ -353,6 +382,7 @@ public class RegController {
     public void initData(String title, String id) {
         RegistratorLabel.setText(title);
         id_reg = id;
+        name_reg = title;
     }
 }
 
