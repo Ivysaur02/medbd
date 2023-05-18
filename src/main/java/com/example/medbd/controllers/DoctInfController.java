@@ -72,9 +72,11 @@ public class DoctInfController {
     @FXML
     void search(ActionEvent event) throws SQLException {
 
+        LocalDate date = DatePicker.getValue();
+        if (date == null)
+            return;
         Connection connection = BdTools.getConnection();
         timeTables.clear();
-        LocalDate date = DatePicker.getValue();
         String query = "SELECT mc.fam, mc.imya, mc.otch, ti.type_ticket, " +
                 "TO_CHAR(date_appointment, 'HH24:MI') "+
                 "FROM ticket ti JOIN medcard mc ON ti.id_medcard = mc.id_medcard " +

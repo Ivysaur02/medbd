@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane fx:id="AddTicket" prefHeight="394.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.AddTicketController">
+   <children>
+      <BorderPane prefHeight="388.0" prefWidth="590.0">
+         <top>
+            <AnchorPane prefHeight="53.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="35.0" layoutY="18.0" text="Запись на приём" />
+                  <Button fx:id="ExitButton" layoutX="512.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" text="Выход" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="362.0" prefWidth="642.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="AddTicketButton" layoutX="30.0" layoutY="290.0" mnemonicParsing="false" onAction="#addTicket" text="Записать" />
+                  <Button fx:id="ClearButton" layoutX="122.0" layoutY="290.0" mnemonicParsing="false" onAction="#clear" text="Очистить" />
+                  <Button fx:id="SearchButton" layoutX="368.0" layoutY="290.0" mnemonicParsing="false" onAction="#searchTicket" text="Поиск" />
+                  <DatePicker fx:id="DatePicker" layoutX="362.0" layoutY="23.0" />
+                  <TableView fx:id="TicketView" layoutX="368.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="TimeColumn" prefWidth="85.60003662109375" text="Время" />
+                      <TableColumn fx:id="InfoColumn" prefWidth="112.79998779296875" text="Доп. инфо" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="TimeTicket" layoutX="109.0" layoutY="36.0" />
+                  <TextField fx:id="TypeTicket" layoutX="109.0" layoutY="95.0" />
+                  <Label layoutX="28.0" layoutY="40.0" text="Время" />
+                  <Label layoutX="26.0" layoutY="99.0" text="Информация" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

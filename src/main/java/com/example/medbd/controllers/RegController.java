@@ -188,11 +188,19 @@ public class RegController {
     }
 
     @FXML
-    void createTicket(ActionEvent event) {
+    void createTicket(ActionEvent event) throws IOException {
         Doctor doc = DoctorTableView.getSelectionModel().getSelectedItem();
         Patient pat = PatientTableView.getSelectionModel().getSelectedItem();
         if(doc == null || pat ==null )
             return;
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("AddTicket.fxml"));
+        Parent root = loader.load();
+        AddTicketController addTicketController = loader.getController();
+        addTicketController.initData(pat, doc, id_reg);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 
