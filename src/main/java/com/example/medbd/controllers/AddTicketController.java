@@ -13,10 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class AddTicketController {
@@ -55,12 +52,50 @@ public class AddTicketController {
     private TextField TypeTicket;
 
     @FXML
-    void addTicket(ActionEvent event) {
+    private Label WarningLabel;
+
+    @FXML
+    void addTicket(ActionEvent event) throws SQLException {
+        LocalDate date_picker = DatePicker.getValue();
+        if (date_picker == null)
+            return;
+        if (TimeTicket.getText().isEmpty())
+            return;
+        String date = TimeTicket.getText();
+        date = date.trim();
+        date += ":00";
+        String date_with_time = date_picker + " " + date;
+        String info = TypeTicket.getText();
+        Connection connection = BdTools.getConnection();
+        String query = "SELECT * FROM ticket WHERE date_appointment = ?";
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        pstmt.setTimestamp(1, Timestamp.valueOf(date_with_time));
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()){
+            WarningLabel.setText("Уже есть запись на данное время");
+            return;
+        }
+        String insert = "INSERT INTO ticket " +
+                "(id_medcard, id_doctor, id_user, date_receipt, date_appointment, status, type_ticket)" +
+                " VALUES (?, ?, ?, CURRENT_TIMESTAMP(0), ?, ?, ?)";
+        pstmt = connection.prepareStatement(insert);
+        pstmt.setInt(1, Integer.parseInt(patient.getId()));
+        pstmt.setInt(2, Integer.parseInt(doctor.getId()));
+        pstmt.setInt(3, Integer.parseInt(id_reg));
+        pstmt.setTimestamp(4, Timestamp.valueOf(date_with_time));
+        pstmt.setInt(5,1);
+        pstmt.setString(6, info);
+
+        pstmt.executeUpdate();
+
+
 
     }
 
     @FXML
     void clear(ActionEvent event) {
+        TimeTicket.clear();
+        TypeTicket.clear();
 
     }
 
@@ -96,17 +131,7 @@ public class AddTicketController {
             String type = rs.getString(4);
             timeTables.add(new TimeTable(fam, im, otch, type, time));
         }
-        String selmax = "SELECT MAX(TO_CHAR(date_appointment, 'HH24:MI')) FROM ticket " +
-                "WHERE DATE_TRUNC('day', date_appointment) = ? AND id_doctor = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(selmax);
-        preparedStatement.setDate(1, java.sql.Date.valueOf(date));
-        preparedStatement.setInt(2, Integer.parseInt(doctor.getId()));
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        maxTime = resultSet.getString(1);
-        if (maxTime == null)
-            maxTime = "08:00:00";
-        System.out.println(maxTime);
+
         ObservableList<TimeTable> timeTableObservableList = FXCollections.observableArrayList(timeTables);
 
         TimeColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -123,7 +148,6 @@ public class AddTicketController {
     double yOffset;
     double xOffset;
 
-    String maxTime;
 
     String id_reg;
 

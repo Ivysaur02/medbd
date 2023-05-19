@@ -33,10 +33,11 @@
                       <TableColumn fx:id="InfoColumn" prefWidth="112.79998779296875" text="Доп. инфо" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="TimeTicket" layoutX="109.0" layoutY="36.0" />
-                  <TextField fx:id="TypeTicket" layoutX="109.0" layoutY="95.0" />
-                  <Label layoutX="28.0" layoutY="40.0" text="Время" />
-                  <Label layoutX="26.0" layoutY="99.0" text="Информация" />
+                  <TextField fx:id="TimeTicket" layoutX="109.0" layoutY="103.0" prefHeight="26.0" prefWidth="155.0" />
+                  <TextField fx:id="TypeTicket" layoutX="111.0" layoutY="154.0" />
+                  <Label layoutX="28.0" layoutY="107.0" text="Время" />
+                  <Label layoutX="28.0" layoutY="158.0" text="Информация" />
+                  <Label fx:id="WarningLabel" layoutX="46.0" layoutY="40.0" prefHeight="18.0" prefWidth="78.0" />
                </children>
             </AnchorPane>
          </center>
