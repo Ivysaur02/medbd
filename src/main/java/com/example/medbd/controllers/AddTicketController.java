@@ -3,6 +3,7 @@ package com.example.medbd.controllers;
 import com.example.medbd.BdConnection.BdTools;
 import com.example.medbd.models.Doctor;
 import com.example.medbd.models.Patient;
+import com.example.medbd.models.Ticket;
 import com.example.medbd.models.TimeTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,17 +65,20 @@ public class AddTicketController {
         String date = TimeTicket.getText();
         date = date.trim();
         date += ":00";
+        //TODO написать проверку чтобы время было во время работы
         String date_with_time = date_picker + " " + date;
         String info = TypeTicket.getText();
         Connection connection = BdTools.getConnection();
-        String query = "SELECT * FROM ticket WHERE date_appointment = ?";
+        String query = "SELECT * FROM ticket WHERE date_appointment = ? AND id_doctor = ?";
         PreparedStatement pstmt = connection.prepareStatement(query);
         pstmt.setTimestamp(1, Timestamp.valueOf(date_with_time));
+        pstmt.setInt(2, Integer.parseInt(doctor.getId()));
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()){
             WarningLabel.setText("Уже есть запись на данное время");
             return;
         }
+        //TODO ПИЗДА ЕСЛИ ЗАПИСЬ НА ВРЕМЯ ЧТО УЖЕ ПРОШЛО
         String insert = "INSERT INTO ticket " +
                 "(id_medcard, id_doctor, id_user, date_receipt, date_appointment, status, type_ticket)" +
                 " VALUES (?, ?, ?, CURRENT_TIMESTAMP(0), ?, ?, ?)";
@@ -87,6 +91,35 @@ public class AddTicketController {
         pstmt.setString(6, info);
 
         pstmt.executeUpdate();
+
+        String selmax = "select MAX(id_ticket) from ticket_view";
+        Statement st = connection.createStatement();
+        ResultSet resultSet = st.executeQuery(selmax);
+        resultSet.next();
+        int id_ticket = resultSet.getInt(1);
+
+        String getTicketinfo = "SELECT * FROM ticket_view WHERE id_ticket = ?";
+        pstmt = connection.prepareStatement(getTicketinfo);
+        pstmt.setInt(1, id_ticket);
+        ResultSet ticketres = pstmt.executeQuery();
+        if (ticketres.next()) {
+            Ticket ticket = new Ticket();
+            ticket.setDate_appointment(ticketres.getString(6));
+            ticket.setDate_receipt(ticketres.getString(5));
+            ticket.setId_ticket(ticketres.getString(1));
+            ticket.setPat_otch(ticketres.getString(4));
+            ticket.setDc_fam(ticketres.getString(7));
+            ticket.setDc_im(ticketres.getString(8));
+            ticket.setDc_otch(ticketres.getString(9));
+            ticket.setName_of_specialty(ticketres.getString(10));
+            ticket.setRoom(ticketres.getString(11));
+            ticket.setUs_fam(ticketres.getString(12));
+            ticket.setUs_im(ticketres.getString(13));
+            ticket.setUs_otch(ticketres.getString(14));
+            ticket.setPat_fam(ticketres.getString(2));
+            ticket.setPat_im(ticketres.getString(3));
+        }
+
 
 
 

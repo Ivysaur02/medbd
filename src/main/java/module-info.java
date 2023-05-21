@@ -3,6 +3,9 @@ module com.example.medbd {
     requires javafx.fxml;
     requires java.sql;
     requires org.postgresql.jdbc;
+    requires kernel;
+    requires layout;
+    requires io;
 
 
     opens com.example.medbd to javafx.fxml;
