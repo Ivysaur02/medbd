@@ -1,6 +1,7 @@
 package com.example.medbd.controllers;
 
 import com.example.medbd.BdConnection.BdTools;
+import com.example.medbd.PDFCreate.PdfGenerator;
 import com.example.medbd.models.Doctor;
 import com.example.medbd.models.Patient;
 import com.example.medbd.models.Ticket;
@@ -14,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -56,7 +58,7 @@ public class AddTicketController {
     private Label WarningLabel;
 
     @FXML
-    void addTicket(ActionEvent event) throws SQLException {
+    void addTicket(ActionEvent event) throws SQLException, IOException {
         LocalDate date_picker = DatePicker.getValue();
         if (date_picker == null)
             return;
@@ -118,11 +120,10 @@ public class AddTicketController {
             ticket.setUs_otch(ticketres.getString(14));
             ticket.setPat_fam(ticketres.getString(2));
             ticket.setPat_im(ticketres.getString(3));
+            PdfGenerator pdfGenerator = new PdfGenerator();
+            pdfGenerator.generatePdf(ticket,"ticket.pdf");
+            //TODo
         }
-
-
-
-
     }
 
     @FXML
