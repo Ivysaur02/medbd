@@ -2,7 +2,6 @@ package com.example.medbd.PDFCreate;
 
 import com.example.medbd.models.Ticket;
 import com.itextpdf.io.font.PdfEncodings;
-import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
@@ -47,7 +46,7 @@ public class PdfGenerator {
         }
     }
 
-    private void addLine(Document document, String text, PdfFont font) {
+    public void addLine(Document document, String text, PdfFont font) {
         Paragraph paragraph = new Paragraph(text);
         paragraph.setFont(font);
         paragraph.setMarginBottom(10f);

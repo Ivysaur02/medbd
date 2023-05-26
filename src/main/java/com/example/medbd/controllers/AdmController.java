@@ -222,8 +222,11 @@ public class AdmController {
 
     }
 
+    public ObservableList<Doctor> getDoctorList() {
+        return DoctorList;
+    }
 
-    private void getDoctorFromBD() throws SQLException {
+    public void getDoctorFromBD() throws SQLException {
         DoctorList.clear();
         Connection connection = BdTools.getConnection();
         String sel =
