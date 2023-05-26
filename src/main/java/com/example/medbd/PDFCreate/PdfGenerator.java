@@ -8,8 +8,12 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.draw.DottedLine;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.LineSeparator;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
+
 import java.io.IOException;
 
 public class PdfGenerator {
@@ -17,28 +21,22 @@ public class PdfGenerator {
     public void generatePdf(Ticket ticket, String fileName) throws IOException {
         PdfWriter writer = new PdfWriter(fileName);
         PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf,PageSize.A4);
+        Document document = new Document(pdf, PageSize.A4);
         // Создаем шрифт
         PdfFont font = PdfFontFactory.createFont("src/main/resources/folds/times.ttf", PdfEncodings.IDENTITY_H);
 
-
         try {
-
             // Добавляем информацию из объекта Ticket в документ
-            addLine(document, "Дата записи на прием: " + ticket.getDate_appointment(), font);
-            addLine(document, "Дата получения: " + ticket.getDate_receipt(), font);
-            addLine(document, "Идентификатор тикета: " + ticket.getId_ticket(), font);
-            addLine(document, "Отчество пациента: " + ticket.getPat_otch(), font);
-            addLine(document, "Фамилия пациента: " + ticket.getDc_fam(), font);
-            addLine(document, "Имя пациента: " + ticket.getDc_im(), font);
-            addLine(document, "Отчество пациента: " + ticket.getDc_otch(), font);
-            addLine(document, "Специальность: " + ticket.getName_of_specialty(), font);
-            addLine(document, "Кабинет: " + ticket.getRoom(), font);
-            addLine(document, "Фамилия врача: " + ticket.getUs_fam(), font);
-            addLine(document, "Имя врача: " + ticket.getUs_im(), font);
-            addLine(document,"Отчество врача: " + ticket.getUs_otch(), font);
-            addLine(document, "Фамилия пациента: " + ticket.getPat_fam(), font);
-            addLine(document, "Имя пациента: " + ticket.getPat_im(), font);
+            addLineOnCentreAndSepar(document, "Талон на приём к врачу № "+ ticket.getId_ticket() , font);
+            addLine(document, "Дата обращения: " + ticket.getDate_receipt(), font);
+            addLine(document, "Пациент(ФИО): " + ticket.getPat_fam() + " " + ticket.getPat_im() + " " +
+                    ticket.getPat_otch(), font);
+            addLine(document,"Назначен приём в "+ ticket.getDate_appointment()+ " У", font);
+            addLine(document, "Врач " +  ticket.getName_of_specialty() + ": " +
+                    ticket.getDc_fam()+ " "+ ticket.getDc_im()+ " " + ticket.getDc_otch() ,font);
+            addLine(document, "Кабинет приёма: " +  ticket.getRoom(), font);
+            addLine(document, "Записан на приём регистратором: " +  ticket.getUs_fam()+ " "+
+                    ticket.getUs_im()+ " " + ticket.getUs_otch(), font);
 
             // Закрываем документ
             document.close();
@@ -51,6 +49,16 @@ public class PdfGenerator {
         Paragraph paragraph = new Paragraph(text);
         paragraph.setFont(font);
         paragraph.setMarginBottom(10f);
+        document.add(paragraph);
+    }
+
+    private void addLineOnCentreAndSepar(Document document, String text, PdfFont font) {
+        LineSeparator lineSeparator = new LineSeparator(new DottedLine());
+        Paragraph paragraph = new Paragraph(text);
+        paragraph.setFont(font);
+        paragraph.setMarginBottom(12f);
+        paragraph.setTextAlignment(TextAlignment.CENTER);
+        paragraph.add(lineSeparator); // Добавляем подчёркивание
         document.add(paragraph);
     }
 }
