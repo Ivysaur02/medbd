@@ -18,6 +18,7 @@ import java.sql.Statement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 
 @RunWith(PowerMockRunner.class)
@@ -38,10 +39,10 @@ public class DoctorControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
         doctorController = new AdmController();
 
-        PowerMockito.mockStatic(BdTools.class);
+        mockStatic(BdTools.class);
         when(BdTools.getConnection()).thenReturn(mockConnection);
     }
 
