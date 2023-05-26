@@ -67,6 +67,5 @@ public class DoctorControllerTest {
         assertEquals(2, doctorController.getDoctorList().size()); // Check the size of the doctor list
     }
 
-    // Add more test methods as needed
 
 }
