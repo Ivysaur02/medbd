@@ -9,33 +9,39 @@
 
 <AnchorPane fx:id="LogInPan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.LogInController">
     <children>
-        <Button fx:id="LogInButton" layoutX="83.0" layoutY="256.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="210.0" style="-fx-background-color: #7FFFD4;" text="Войти" />
-        <TextField fx:id="LoginField" layoutX="101.0" layoutY="139.0" prefHeight="26.0" prefWidth="218.0" promptText="Логин" />
-      <PasswordField fx:id="PaswField" layoutX="101.0" layoutY="187.0" prefHeight="26.0" prefWidth="218.0" promptText="Пароль" />
-      <Button fx:id="CancelButton" layoutX="83.0" layoutY="310.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="210.0" style="-fx-background-color: #7FFFD4;" text="Выход" />
-      <Label fx:id="MessageLabel" alignment="CENTER" layoutX="83.0" layoutY="100.0" prefHeight="26.0" prefWidth="210.0" textFill="#d10c0c" />
-      <Label alignment="CENTER" layoutX="57.0" layoutY="44.0" prefHeight="26.0" prefWidth="246.0" text="Авторизация">
+        <Button fx:id="LogInButton" layoutX="83.0" layoutY="256.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="210.0" style="-fx-background-color: #9ACD32;" text="Войти">
          <font>
             <Font size="14.0" />
+         </font></Button>
+        <TextField fx:id="LoginField" layoutX="101.0" layoutY="139.0" prefHeight="26.0" prefWidth="218.0" promptText="Логин" />
+      <PasswordField fx:id="PaswField" layoutX="101.0" layoutY="187.0" prefHeight="26.0" prefWidth="218.0" promptText="Пароль" />
+      <Button fx:id="CancelButton" layoutX="83.0" layoutY="310.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="38.0" prefWidth="210.0" style="-fx-background-color: #9ACD32;" text="Выход">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="MessageLabel" alignment="CENTER" layoutX="55.0" layoutY="92.0" prefHeight="26.0" prefWidth="238.0" textFill="#d10c0c" />
+      <Label alignment="CENTER" layoutX="65.0" layoutY="42.0" prefHeight="26.0" prefWidth="246.0" text="Авторизация" textFill="DARKORANGE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="354.0" prefHeight="400.0" prefWidth="245.0" style="-fx-background-color: #7FFFD4;">
+      <AnchorPane layoutX="345.0" prefHeight="400.0" prefWidth="255.0" style="-fx-background-color: #9ACD32;">
          <children>
-            <Label layoutX="16.0" layoutY="89.0" text="Тут могла бы быть ваша реклама" textFill="#181818">
+            <Label layoutX="8.0" layoutY="66.0" prefHeight="162.0" prefWidth="238.0" text="Курсовая работа&#10;Регистратура поликлиники&#10;Выполнил Сочнев И.А. &#10;Благодарность Губарьковой М.В." textFill="#181818" wrapText="true">
                <font>
-                  <Font size="14.0" />
+                  <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="37.0" layoutY="144.0" text="Логин">
+      <Label layoutX="37.0" layoutY="144.0" text="Логин" textFill="DARKORANGE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="37.0" layoutY="192.0" text="Пароль">
+      <Label layoutX="37.0" layoutY="192.0" text="Пароль" textFill="DARKORANGE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
     </children>

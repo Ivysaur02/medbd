@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class AddTicketController {
 
@@ -67,7 +68,11 @@ public class AddTicketController {
         String date = TimeTicket.getText();
         date = date.trim();
         date += ":00";
-        //TODO написать проверку чтобы время было во время работы
+        LocalTime time = LocalTime.parse(date);
+        if (time.isBefore(LocalTime.of(8, 0)) || time.isAfter(LocalTime.of(18, 0))) {
+            WarningLabel.setText("Запись на неприёмное время");
+            return;
+        }
         String date_with_time = date_picker + " " + date;
         String info = TypeTicket.getText();
         Connection connection = BdTools.getConnection();
@@ -77,10 +82,16 @@ public class AddTicketController {
         pstmt.setInt(2, Integer.parseInt(doctor.getId()));
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()){
+            WarningLabel.setText("");
             WarningLabel.setText("Уже есть запись на данное время");
             return;
         }
-        //TODO ПИЗДА ЕСЛИ ЗАПИСЬ НА ВРЕМЯ ЧТО УЖЕ ПРОШЛО
+        LocalDate currentDate = LocalDate.now();
+        if (date_picker.isBefore(currentDate)) {
+            WarningLabel.setText("");
+            WarningLabel.setText("Невозможно записать на прошедшее число");
+            return;
+        }
         String insert = "INSERT INTO ticket " +
                 "(id_medcard, id_doctor, id_user, date_receipt, date_appointment, status, type_ticket)" +
                 " VALUES (?, ?, ?, CURRENT_TIMESTAMP(0), ?, ?, ?)";

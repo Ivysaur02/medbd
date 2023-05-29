@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="addPatientPan" prefHeight="540.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.AddPatientController">
    <children>
@@ -16,39 +17,82 @@
                <children>
                   <VBox layoutX="15.0" layoutY="42.0" prefHeight="414.0" prefWidth="250.0">
                      <children>
-                        <Label text="Фамилия*" />
+                        <Label text="Фамилия*" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="FamTextField" />
-                        <Label text="Имя*" />
+                        <Label text="Имя*" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="ImyaTextField" />
-                        <Label text="Отчество" />
+                        <Label text="Отчество" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="OtchTextField" />
-                        <Label text="Пол*" />
+                        <Label text="Пол*" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <ComboBox fx:id="SexCombBox" prefHeight="26.0" prefWidth="58.0" />
-                        <Label prefHeight="18.0" prefWidth="153.0" text="Дата рождения*" />
+                        <Label prefHeight="18.0" prefWidth="153.0" text="Дата рождения*" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="DateField" promptText="YYYY-MM-DD" />
-                        <Label prefHeight="18.0" prefWidth="138.0" text="СНИЛС*" />
+                        <Label prefHeight="18.0" prefWidth="138.0" text="СНИЛС*" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="SNILSField" />
-                        <Label prefHeight="18.0" prefWidth="78.0" text="Телефон" />
+                        <Label prefHeight="18.0" prefWidth="78.0" text="Телефон" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="PhoneField" />
-                        <Label prefHeight="18.0" prefWidth="47.0" text="Улица" />
+                        <Label prefHeight="18.0" prefWidth="47.0" text="Улица" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="StreetField" />
-                        <Label prefHeight="20.0" prefWidth="46.0" text="Дом" />
+                        <Label prefHeight="20.0" prefWidth="46.0" text="Дом" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="ApartField" prefHeight="11.0" prefWidth="254.0" />
-                        <Label prefHeight="18.0" prefWidth="78.0" text="Квартира" />
+                        <Label prefHeight="18.0" prefWidth="78.0" text="Квартира" textFill="DARKORANGE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
                         <TextField fx:id="RoomField" />
                      </children>
                   </VBox>
-                  <Label layoutX="15.0" layoutY="14.0" prefHeight="18.0" prefWidth="289.0" text="Поля помеченные * обязательны для заполнения" />
-                  <Button fx:id="AddPatientButton" layoutX="474.0" layoutY="405.0" mnemonicParsing="false" onAction="#addPAtient" text="Добавить" />
-                  <Button fx:id="ClearButton" layoutX="475.0" layoutY="449.0" mnemonicParsing="false" onAction="#clearField" text="Очистить" />
+                  <Label layoutX="15.0" layoutY="14.0" prefHeight="20.0" prefWidth="384.0" text="Поля помеченные * обязательны для заполнения" textFill="#fa0202">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Button fx:id="AddPatientButton" layoutX="442.0" layoutY="416.0" mnemonicParsing="false" onAction="#addPAtient" style="-fx-background-color: #9ACD32;" text="Добавить">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="ClearButton" layoutX="443.0" layoutY="460.0" mnemonicParsing="false" onAction="#clearField" style="-fx-background-color: #9ACD32;" text="Очистить">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </center>
          <top>
-            <AnchorPane prefHeight="44.0" prefWidth="566.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="43.0" prefWidth="579.0" style="-fx-background-color: #9ACD32;" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="174.0" text="Добавление нового пациента" />
-                  <Button fx:id="ExitButton" layoutX="467.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="68.0" text="Выход" />
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="223.0" text="Добавление нового пациента">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="ExitButton" layoutX="467.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #ff8c00;" text="Выход" />
                </children>
             </AnchorPane>
          </top>

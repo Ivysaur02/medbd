@@ -5,20 +5,36 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.UpdDoctController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.UpdDoctController">
    <center>
-      <AnchorPane prefHeight="290.0" prefWidth="474.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="268.0" prefWidth="385.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="68.0" layoutY="83.0" text="Имя" />
-            <Label layoutX="68.0" layoutY="120.0" text="Фамилия" />
-            <Label layoutX="68.0" layoutY="159.0" text="Отчество" />
-            <Label layoutX="70.0" layoutY="200.0" text="Кабинет" />
-            <TextField fx:id="ImyaTextField" layoutX="166.0" layoutY="79.0" />
-            <TextField fx:id="OtchTextField" layoutX="166.0" layoutY="155.0" />
-            <TextField fx:id="FamTextField" layoutX="166.0" layoutY="116.0" />
-            <TextField fx:id="RoomTextField" layoutX="166.0" layoutY="196.0" />
-            <Button fx:id="UpdButton" layoutX="82.0" layoutY="248.0" mnemonicParsing="false" onAction="#UpdDoctor" text="Изменить" />
+            <Label layoutX="30.0" layoutY="83.0" text="Имя" textFill="DARKORANGE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="30.0" layoutY="120.0" text="Фамилия" textFill="DARKORANGE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="30.0" layoutY="159.0" text="Отчество" textFill="DARKORANGE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label layoutX="32.0" layoutY="200.0" text="Кабинет" textFill="DARKORANGE">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <TextField fx:id="ImyaTextField" layoutX="128.0" layoutY="79.0" />
+            <TextField fx:id="OtchTextField" layoutX="128.0" layoutY="155.0" />
+            <TextField fx:id="FamTextField" layoutX="128.0" layoutY="116.0" />
+            <TextField fx:id="RoomTextField" layoutX="128.0" layoutY="196.0" />
+            <Button fx:id="UpdButton" layoutX="120.0" layoutY="249.0" mnemonicParsing="false" onAction="#UpdDoctor" style="-fx-background-color: #9ACD32;" text="Изменить">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </center>

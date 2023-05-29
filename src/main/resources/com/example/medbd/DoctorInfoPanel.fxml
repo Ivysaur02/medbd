@@ -7,16 +7,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="DoctorInfoPanel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.DoctInfController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
-            <AnchorPane prefHeight="52.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: #9ACD32;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="ExitButton" layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" text="Выход" />
-                  <Label layoutX="34.0" layoutY="17.0" text="Расписание" />
+                  <Button fx:id="ExitButton" layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #ff8c00;" text="Выход">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Label layoutX="22.0" layoutY="15.0" text="Расписание">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
          </top>
@@ -33,9 +39,18 @@
                         <TableColumn fx:id="AnyInfoField" prefWidth="94.4000244140625" text="Уточнения" />
                     </columns>
                   </TableView>
-                  <Button fx:id="PrintButton" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#print" text="Распечатать" />
-                  <Button fx:id="SearchButton" layoutX="15.0" layoutY="84.0" mnemonicParsing="false" onAction="#search" text="Найти" />
-                  <Label layoutX="14.0" layoutY="14.0" text="Дата" />
+                  <Button fx:id="PrintButton" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#print" style="-fx-background-color: #9ACD32;" text="Распечатать">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Button fx:id="SearchButton" layoutX="15.0" layoutY="84.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #9ACD32;" text="Найти">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="42.0" text="Дата" textFill="DARKORANGE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
          </left>

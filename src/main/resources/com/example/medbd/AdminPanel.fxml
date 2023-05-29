@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="AdmPanel" prefHeight="511.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.medbd.controllers.AdmController">
     <children>
@@ -18,7 +19,7 @@
                             <children>
                                 <TableView fx:id="DoctTable" layoutX="21.0" layoutY="14.0" prefHeight="310.0" prefWidth="658.0">
                                     <columns>
-                                        <TableColumn fx:id="idDoct" maxWidth="107.99997138977051" prefWidth="60.79998970031738" text="Id" />
+                                        <TableColumn fx:id="idDoct" maxWidth="107.99997138977051" prefWidth="60.79998970031738" text="ID" />
                                         <TableColumn fx:id="FamDoct" prefWidth="121.5999984741211" text="Фамилия" />
                                         <TableColumn fx:id="ImDoct" prefWidth="100.0" text="Имя" />
                                         <TableColumn fx:id="otchDoct" prefWidth="125.5999755859375" text="Отчество" />
@@ -26,10 +27,10 @@
                                         <TableColumn fx:id="roomDoct" prefWidth="94.4000244140625" text="Кабинет" />
                                     </columns>
                                 </TableView>
-                                <Button fx:id="AddBut" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#addDoc" text="Add" />
-                                <Button fx:id="DelBut" layoutX="90.0" layoutY="328.0" mnemonicParsing="false" onAction="#DelDoc" text="Del" />
-                                <Button fx:id="UpdBut" layoutX="161.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" text="Upd" />
-                                <Button fx:id="Refresh" layoutX="230.0" layoutY="328.0" mnemonicParsing="false" onAction="#RefreshData" text="Refresh" />
+                                <Button fx:id="AddBut" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#addDoc" style="-fx-background-color: #9ACD32;" text="Добавить" />
+                                <Button fx:id="DelBut" layoutX="118.0" layoutY="328.0" mnemonicParsing="false" onAction="#DelDoc" style="-fx-background-color: #9ACD32;" text="Удалить" />
+                                <Button fx:id="UpdBut" layoutX="215.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" style="-fx-background-color: #9ACD32;" text="Обновить данные" />
+                                <Button fx:id="Refresh" layoutX="369.0" layoutY="328.0" mnemonicParsing="false" onAction="#RefreshData" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -40,24 +41,30 @@
                             <children>
                                 <TableView fx:id="UserTable" layoutX="4.0" layoutY="6.0" prefHeight="328.0" prefWidth="686.0">
                                     <columns>
-                                        <TableColumn fx:id="idUser" prefWidth="50.400023460388184" text="id" />
+                                        <TableColumn fx:id="idUser" prefWidth="50.400023460388184" text="ID" />
                                         <TableColumn fx:id="FamUser" prefWidth="114.39996719360352" text="Фамилия" />
-                                        <TableColumn fx:id="ImyaUser" minWidth="6.4000244140625" prefWidth="106.40000915527344" text="Игорь" />
+                                        <TableColumn fx:id="ImyaUser" minWidth="6.4000244140625" prefWidth="106.40000915527344" text="Имя" />
                                         <TableColumn fx:id="OtchUser" prefWidth="102.4000244140625" text="Отчество" />
                                         <TableColumn fx:id="TitleUser" prefWidth="100.00006103515625" text="Должность" />
                                         <TableColumn fx:id="LoginUser" prefWidth="118.4000244140625" text="login" />
                                         <TableColumn fx:id="PasswordUser" prefWidth="119.199951171875" text="password" />
                                     </columns>
                                 </TableView>
-                                <Button fx:id="AddUserButton" layoutX="14.0" layoutY="334.0" mnemonicParsing="false" onAction="#addUser" text="Add" />
-                                <Button fx:id="DelUserButton" layoutX="78.0" layoutY="334.0" mnemonicParsing="false" onAction="#DelUser" text="Del" />
-                                <Button fx:id="RefrehUserButton" layoutX="142.0" layoutY="334.0" mnemonicParsing="false" onAction="#RefreshUser" text="Refresh" />
+                                <Button fx:id="AddUserButton" layoutX="21.0" layoutY="334.0" mnemonicParsing="false" onAction="#addUser" style="-fx-background-color: #9ACD32;" text="Добавить" />
+                                <Button fx:id="DelUserButton" layoutX="118.0" layoutY="334.0" mnemonicParsing="false" onAction="#DelUser" style="-fx-background-color: #9ACD32;" text="Удалить" />
+                                <Button fx:id="RefrehUserButton" layoutX="211.0" layoutY="334.0" mnemonicParsing="false" onAction="#RefreshUser" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
             </tabs>
         </TabPane>
-      <Button fx:id="exitButton" layoutX="648.0" layoutY="19.0" mnemonicParsing="false" onAction="#onLogInPanel" text="Выход" />
-      <Label fx:id="adminLabel" layoutX="44.0" layoutY="25.0" prefHeight="18.0" prefWidth="257.0" />
+      <Button fx:id="exitButton" layoutX="638.0" layoutY="19.0" mnemonicParsing="false" onAction="#onLogInPanel" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #9ACD32;" text="Выход">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="adminLabel" layoutX="44.0" layoutY="25.0" prefHeight="27.0" prefWidth="342.0" textFill="DARKORANGE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
     </children>
 </AnchorPane>

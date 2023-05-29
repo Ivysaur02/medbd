@@ -83,9 +83,9 @@ public class LogInController {
                 String otch = rs.getString("otch");
                 String id = rs.getString("id");
                 if (title.equals("0")) {
-                    loadUserWindow("AdminPanel.fxml", "Admin " + fam + " " + im + " " + otch, true, id);
+                    loadUserWindow("AdminPanel.fxml", "Администратор " + fam + " " + im + " " + otch, true, id);
                 } else {
-                    loadUserWindow("RegistrPanel.fxml", "Registrator " + fam + " " + im + " " + otch, false, id);
+                    loadUserWindow("RegistrPanel.fxml", "Регистратор " + fam + " " + im + " " + otch, false, id);
                 }
                 stage.close();
             } else {
