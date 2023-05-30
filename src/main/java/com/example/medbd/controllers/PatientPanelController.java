@@ -137,7 +137,7 @@ public class PatientPanelController {
                         "WHERE id_medcard = ?"
         );
 
-        statement.setInt(1, Integer.parseInt(PatientSnils.getText()));
+        statement.setString(1, PatientSnils.getText());
         statement.setDate(2, Date.valueOf(PatientDate.getText()));
         //TODO проверять ебучую дату
         if (!PatientRoom.getText().isEmpty())

@@ -103,6 +103,8 @@ public class AdmController {
 
     @FXML
     private Label adminLabel;
+    @FXML
+    private Button UpdUserButton;
 
 
     @FXML
@@ -124,6 +126,26 @@ public class AdmController {
         newStage.setScene(new Scene(root));
         newStage.show();
         closestage.close();
+
+    }
+
+
+    @FXML
+    void UpdUser(ActionEvent event) throws IOException {
+        User selUser = UserTable.getSelectionModel().getSelectedItem();
+        if (selUser == null)
+            return;
+        FXMLLoader loader = new FXMLLoader(bdApplic.class.getResource("UpdUserPanel.fxml"));
+        Parent root = loader.load();
+        UpdUserController updateController = loader.getController();
+
+        // Вызываем метод initData() на контроллере нового окна и передаем в него выбранного пользователя
+        updateController.initData(selUser);
+
+        // Отображаем новое окно
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 

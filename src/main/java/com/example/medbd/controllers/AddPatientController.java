@@ -98,7 +98,7 @@ public class AddPatientController {
                 preparedStatement.setNull(9, Types.INTEGER);
             preparedStatement.setString(8, patient.getHome());
             preparedStatement.setString(10, patient.getPhone());
-            preparedStatement.setInt(11, Integer.parseInt(patient.getSnils()));
+            preparedStatement.setString(11, patient.getSnils());
 
 
             preparedStatement.executeUpdate();

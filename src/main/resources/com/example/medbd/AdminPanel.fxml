@@ -29,8 +29,8 @@
                                 </TableView>
                                 <Button fx:id="AddBut" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#addDoc" style="-fx-background-color: #9ACD32;" text="Добавить" />
                                 <Button fx:id="DelBut" layoutX="118.0" layoutY="328.0" mnemonicParsing="false" onAction="#DelDoc" style="-fx-background-color: #9ACD32;" text="Удалить" />
-                                <Button fx:id="UpdBut" layoutX="215.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" style="-fx-background-color: #9ACD32;" text="Обновить данные" />
-                                <Button fx:id="Refresh" layoutX="369.0" layoutY="328.0" mnemonicParsing="false" onAction="#RefreshData" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
+                                <Button fx:id="UpdBut" layoutX="215.0" layoutY="328.0" mnemonicParsing="false" onAction="#UpdDoc" style="-fx-background-color: #9ACD32;" text="Редактировать" />
+                                <Button fx:id="Refresh" layoutX="355.0" layoutY="328.0" mnemonicParsing="false" onAction="#RefreshData" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -52,7 +52,8 @@
                                 </TableView>
                                 <Button fx:id="AddUserButton" layoutX="21.0" layoutY="334.0" mnemonicParsing="false" onAction="#addUser" style="-fx-background-color: #9ACD32;" text="Добавить" />
                                 <Button fx:id="DelUserButton" layoutX="118.0" layoutY="334.0" mnemonicParsing="false" onAction="#DelUser" style="-fx-background-color: #9ACD32;" text="Удалить" />
-                                <Button fx:id="RefrehUserButton" layoutX="211.0" layoutY="334.0" mnemonicParsing="false" onAction="#RefreshUser" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
+                                <Button fx:id="RefrehUserButton" layoutX="340.0" layoutY="334.0" mnemonicParsing="false" onAction="#RefreshUser" style="-fx-background-color: #9ACD32;" text="Обновить таблицу" />
+                        <Button fx:id="UpdUserButton" layoutX="204.0" layoutY="334.0" mnemonicParsing="false" onAction="#UpdUser" style="-fx-background-color: #9ACD32;" text="Редактировать" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
