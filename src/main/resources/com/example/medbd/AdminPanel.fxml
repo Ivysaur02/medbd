@@ -63,7 +63,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label fx:id="adminLabel" layoutX="44.0" layoutY="25.0" prefHeight="27.0" prefWidth="342.0" textFill="DARKORANGE">
+      <Label fx:id="adminLabel" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="575.0" textFill="DARKORANGE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>

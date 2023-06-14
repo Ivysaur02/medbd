@@ -27,7 +27,7 @@
       </Label>
       <AnchorPane layoutX="345.0" prefHeight="400.0" prefWidth="255.0" style="-fx-background-color: #9ACD32;">
          <children>
-            <Label layoutX="8.0" layoutY="66.0" prefHeight="162.0" prefWidth="238.0" text="Курсовая работа&#10;Регистратура поликлиники&#10;Выполнил Сочнев И.А. &#10;Благодарность Губарьковой М.В." textFill="#181818" wrapText="true">
+            <Label layoutX="8.0" layoutY="66.0" prefHeight="162.0" prefWidth="238.0" text="Курсовая работа&#10;Регистратура поликлиники&#10;Выполнил Сочнев И.А. &#10;Научный руководитель:&#10;Луканов Александр Сергеевич&#10;Благодарность Губарьковой М.В." textFill="#181818" wrapText="true">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>

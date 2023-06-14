@@ -39,7 +39,7 @@
                         <TableColumn fx:id="AnyInfoField" prefWidth="94.4000244140625" text="Уточнения" />
                     </columns>
                   </TableView>
-                  <Button fx:id="PrintButton" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#print" style="-fx-background-color: #9ACD32;" text="Распечатать">
+                  <Button fx:id="PrintButton" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#print" style="-fx-background-color: #9ACD32;" text="Распечатать" visible="false">
                      <font>
                         <Font size="14.0" />
                      </font></Button>

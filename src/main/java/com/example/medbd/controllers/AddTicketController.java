@@ -135,6 +135,11 @@ public class AddTicketController {
             pdfGenerator.generatePdf(ticket,"ticket.pdf");
             //TODo
         }
+        Alert message = new Alert(Alert.AlertType.INFORMATION);
+        message.setTitle("Успех");
+        message.setHeaderText(null);
+        message.setContentText("Талон успешно сформирован");
+        message.showAndWait();
     }
 
     @FXML
